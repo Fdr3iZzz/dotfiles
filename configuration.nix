@@ -1,15 +1,12 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, pkgs, ... }:
-
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
-
+  config,
+  pkgs,
+  user,
+  ...
+}: {
   # Bootloader.
   boot.loader = {
     systemd-boot.enable = false;
@@ -25,7 +22,6 @@
       backgroundColor = "#FF10F0";
     };
   };
-
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -93,10 +89,10 @@
   # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.franz3 = {
+  users.users.${user} = {
     isNormalUser = true;
     description = " ";
-    extraGroups = [ "networkmanager" "wheel" "vboxuser" ];
+    extraGroups = ["networkmanager" "wheel" "vboxuser"];
   };
 
   # Allow unfree packages
@@ -108,25 +104,13 @@
     firefox
     kate
     git
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
+    #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    #  wget
   ];
 
   virtualisation.virtualbox.guest.enable = true;
 
-
-  home-manager.users.franz3 = { pkgs, ...}: {
-    home.packages = with pkgs; [
-      htop
-    ];
-    home.stateVersion = "23.05";
-  };
-
-
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  enviroment.systemPackages = [
-    pkgs.home-manager
-  ];
+  nix.settings.experimental-features = ["nix-command" "flakes"];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -154,5 +138,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.05"; # Did you read the comment?
-
 }
