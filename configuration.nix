@@ -19,7 +19,6 @@
       devices = ["nodev"];
       efiSupport = true;
       configurationLimit = 5;
-      backgroundColor = "#FF10F0";
     };
   };
 
