@@ -7,5 +7,6 @@
 }: {
   home.packages = with pkgs; [
     htop
+    vim
   ];
 }

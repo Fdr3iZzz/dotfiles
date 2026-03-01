@@ -51,15 +51,10 @@
   };
 
   # X11
-  services.xserver = {
-    enable = true;
-    layout = "de";
-    xkbVariant = "";
+  services.xserver.xkb = {
+   layout = "de";
+   variant = "";
   };
-
-  # KDE
-  services.xserver.displayManager.sddm.enable = true;
-  services.xserver.desktopManager.plasma5.enable = true;
 
   # Configure console keymap
   console.keyMap = "de";
@@ -68,8 +63,7 @@
   services.printing.enable = true;
 
   # Enable sound with pipewire.
-  sound.enable = true;
-  hardware.pulseaudio.enable = false;
+  # hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -100,9 +94,8 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    firefox
-    kate
     git
+    wayland-utils
     #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     #  wget
   ];

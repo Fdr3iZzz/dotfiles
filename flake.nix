@@ -12,9 +12,11 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nvf.url = "github:notashelf/nvf";
   };
 
-  outputs = inputs @ {nixpkgs, ...}: let
+  outputs = inputs @ {nixpkgs, nvf, ...}: let
     system = "x86_64-linux";
     user = "franz3";
   in {
@@ -32,7 +34,7 @@
               home-manager = {
                 useGlobalPkgs = true;
                 useUserPackages = true;
-                users.${user} = {
+                users.${user} = {pkgs, ... }: {
                   imports = [
                     # common home-manager configuration
                     ./home.nix
