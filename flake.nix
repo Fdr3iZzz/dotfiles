@@ -56,7 +56,6 @@
 
           modules = [
             { nixpkgs.overlays = [
-                inputs.hyprland.overlays.default
                 inputs.nur.overlays.default
               ];
             }

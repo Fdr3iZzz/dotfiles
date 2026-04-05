@@ -10,6 +10,8 @@ let
 	spicePkgs = inputs.spicetify.legacyPackages.${pkgs.stdenv.system};
 	stashPkgs = inputs.stash.packages.${pkgs.stdenv.system}.stash;
 	heliumPkgs = inputs.helium.packages.${pkgs.stdenv.system}.default;
+	hyprlandPkgs = inputs.hyprland.packages.${pkgs.stdenv.system}.hyprland;
+	hyprPortalPkgs = inputs.hyprland.packages.${pkgs.stdenv.system}.xdg-desktop-portal-hyprland;
 in
 {
 	home.packages = [
@@ -227,6 +229,7 @@ in
 					extensions = {
 						# dont froce for now until its possible to set up/ link KeePassXC with its extension using nix
 						# force = true;
+						# https://nur.nix-community.org/repos/rycee/
 						packages = with pkgs.nur.repos.rycee.firefox-addons; [
 							violentmonkey
 							dearrow
@@ -235,6 +238,8 @@ in
 							# still dont care about cookies
 							# translator
 							# fast forward thingy
+							# youtube shorts
+							# youtube dislikes
 							# clear urls (remove tracking, shorten)
 						];
 						# wait till available: https://github.com/nix-community/home-manager/issues/8094
@@ -321,7 +326,7 @@ in
 
 	services = {
 		# cliphist.enable = true;
-		swww.enable = true;
+		awww.enable = true;
 		hyprpolkitagent.enable = true;
 		udiskie.enable = true;
 
@@ -386,6 +391,8 @@ in
 
 	wayland.windowManager.hyprland = {
 		enable = true;
+		package = hyprlandPkgs;
+		portalPackage = hyprPortalPkgs;
 		xwayland.enable = true;
 
 		settings = {
@@ -425,7 +432,7 @@ in
 			];
 
 			exec-once = [
-				"swww-daemon"
+				"awww-daemon"
 				"systemctl --user start hyprpolkitagent"
 				"dunst"
 				"wl-paste --watch cliphist store"
