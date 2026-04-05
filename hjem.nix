@@ -1,0 +1,5 @@
+{ pkgs, user, ... }:
+
+{
+  # config here
+}
