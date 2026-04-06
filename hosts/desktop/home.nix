@@ -12,7 +12,7 @@ let
 	heliumPkgs = inputs.helium.packages.${pkgs.stdenv.system}.default;
 	hyprlandPkgs = inputs.hyprland.packages.${pkgs.stdenv.system}.hyprland;
 	hyprPortalPkgs = inputs.hyprland.packages.${pkgs.stdenv.system}.xdg-desktop-portal-hyprland;
-	flakePath = builtins.getEnv "HOME" + "/nixos-config";
+	flakePath = "~/nixos-config";
 in
 {
 	home.packages = [
