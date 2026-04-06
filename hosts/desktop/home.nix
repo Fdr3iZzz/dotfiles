@@ -12,6 +12,7 @@ let
 	heliumPkgs = inputs.helium.packages.${pkgs.stdenv.system}.default;
 	hyprlandPkgs = inputs.hyprland.packages.${pkgs.stdenv.system}.hyprland;
 	hyprPortalPkgs = inputs.hyprland.packages.${pkgs.stdenv.system}.xdg-desktop-portal-hyprland;
+	flakePath = builtins.getEnv "HOME" + "/nixos-config";
 in
 {
 	home.packages = [
@@ -112,7 +113,9 @@ in
 		zathura.enable = true;
 		nh = {
 			enable = true;
-			flake = "$HOME/nixos-config";
+			flake = flakePath;
+			osFlake = flakePath;
+			homeFlake = flakePath;
 		};
 
 		kitty = {
